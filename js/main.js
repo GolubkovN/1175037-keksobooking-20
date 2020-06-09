@@ -1,40 +1,12 @@
 'use strict';
 
-var QUANTITY_COUNT = 8;
-
-var AVATAR = [
-  'img/avatars/user01.png',
-  'img/avatars/user02.png',
-  'img/avatars/user03.png',
-  'img/avatars/user04.png',
-  'img/avatars/user05.png',
-  'img/avatars/user06.png',
-  'img/avatars/user07.png',
-  'img/avatars/user08.png'
-];
-
-var TITLE = [
-  'Уютное гнездышко для молодоженов',
-  'Брутальный ЛОФТ',
-  'Тупо однушка',
-  'Квартирка с атмосферой',
-  'Шикарные апартоменты',
-  'Холостяцкая берлога',
-  'Сдам квартиру дорого',
-  'Крутая точка для вписки'
-];
-
 var TYPE = [
   'palace',
   'flat',
-  'hous',
+  'house',
   'bungalo'
 ];
-
-var CHECKIN = ['12:00', '13:00', '14:00'];
-
-var CHECKOUT = ['12:00', '13:00', '14:00'];
-
+var CHECKING_TIME = ['12:00', '13:00', '14:00'];
 var FEATURES = [
   'wifi',
   'dishwasher',
@@ -43,36 +15,23 @@ var FEATURES = [
   'elevator',
   'conditioner'
 ];
-
-var DESCR = [
-  'Великолепная квартира-студия в центре Токио. Подходит как туристам, так и бизнесменам. Квартира полностью укомплектована и недавно отремонтирована.',
-  'Идейные соображения высшего порядка, а также реализация намеченных плановых заданий влечет за собой процесс внедрения и модернизации направлений прогрессивного развити',
-  'Задача организации, в особенности же укрепление и развитие структуры требуют от нас анализа новых предложений.',
-  'Значимость этих проблем настолько очевидна, что дальнейшее развитие различных форм деятельности представляет собой интересный эксперимент проверки дальнейших направлений развития.',
-  'Товарищи! постоянный количественный рост и сфера нашей активности позволяет выполнять важные задания по разработке модели развития.',
-  'Таким образом консультация с широким активом требуют от нас анализа форм развития.'
-];
-
 var PHOTOS = [
   'http://o0.github.io/assets/images/tokyo/hotel1.jpg',
   'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
   'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
 ];
-
-var maxWidth = 1155;
-
-var maxHeight = 630;
-
+var MAX_HEIGHT = 630;
+var MIN_HEIGHT = 130;
+var PRICE_MIN = 10000;
+var PRICE_MAX = 50000;
+var PIN_WIDTH = 50 / 2;
+var countNumber = 8;
 var similarPinTemplate = document.querySelector('#pin')
   .content
   .querySelector('.map__pin');
-
 var mapPins = document.querySelector('.map__pins');
-
+var mapWidth = document.querySelector('.map__pins').offsetWidth;
 var pinFragment = document.createDocumentFragment();
-
-// Временно убираем класс скрытия с .Map
-document.querySelector('.map').classList.remove('map--faded');
 
 // функция генерации случайных чисел
 var getRandomNumb = function (min, max) {
@@ -80,36 +39,43 @@ var getRandomNumb = function (min, max) {
 };
 
 // функция случайного индекса массива
-var getRandomIndex = function (arr) {
-  return Math.floor(Math.random() * Math.floor(arr.length));
+var getRandomIndex = function (arrLength) {
+  return Math.floor(Math.random() * arrLength);
 };
 
-// функция для создания массива
-var generateData = function () {
-  var data = {
+// функция для создания объекта
+var generateData = function (i) {
+  var locY = getRandomNumb(MIN_HEIGHT, MAX_HEIGHT);
+  var locX = getRandomNumb(0 + PIN_WIDTH, mapWidth - PIN_WIDTH);
+
+  var ads = {
     author: {
-      avatar: AVATAR[getRandomIndex(AVATAR)]
+      avatar: 'img/avatars/user0' + (i + 1) + '.png'
     },
     offer: {
-      title: TITLE [getRandomIndex(TITLE)],
-      address: getRandomNumb(1, 600) + ', ' + getRandomNumb(1, 350),
-      price: getRandomNumb(10000, 50000),
+      title: 'Заголовок',
+      address: locX + ', ' + locY,
+      price: getRandomNumb(PRICE_MIN, PRICE_MAX),
       type: TYPE[getRandomIndex(TYPE)],
       rooms: getRandomNumb(1, 3),
       guests: getRandomNumb(1, 3),
-      checkin: CHECKIN[getRandomIndex(CHECKIN)],
-      checkout: CHECKOUT[getRandomIndex(CHECKOUT)],
-      features: FEATURES.slice(0, getRandomNumb(0, FEATURES.length)),
-      description: DESCR[getRandomIndex(DESCR)],
-      photos: PHOTOS.slice(0, getRandomNumb(0, PHOTOS.length)),
+      checkin: CHECKING_TIME[getRandomIndex(CHECKING_TIME)],
+      checkout: CHECKING_TIME[getRandomIndex(CHECKING_TIME)],
+      features: FEATURES.slice(getRandomIndex(FEATURES)),
+      description: 'Описание',
+      photos: PHOTOS.slice(getRandomIndex(PHOTOS)),
     },
     location: {
-      x: getRandomNumb(45, maxWidth),
-      y: getRandomNumb(130, maxHeight)
+      x: locX,
+      y: locY
     }
   };
-  return data;
+
+  return ads;
 };
+
+// Временно убираем класс скрытия с .Map
+document.querySelector('.map').classList.remove('map--faded');
 
 // функция отрисовки метки
 var renderPin = function (data) {
@@ -122,8 +88,7 @@ var renderPin = function (data) {
   return pinElement;
 };
 
-for (var i = 0; i < QUANTITY_COUNT; i++) {
-  pinFragment.appendChild(renderPin(generateData()));
-  mapPins.appendChild(pinFragment);
+for (var i = 0; i < countNumber; i++) {
+  pinFragment.appendChild(renderPin(generateData(i)));
 }
-
+mapPins.appendChild(pinFragment);

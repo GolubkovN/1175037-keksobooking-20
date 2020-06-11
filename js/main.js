@@ -22,6 +22,7 @@ var PHOTOS = [
 ];
 var MAX_Y = 630;
 var MIN_Y = 130;
+var PIN_WIDTH = 50 / 2;
 var PRICE_MIN = 10000;
 var PRICE_MAX = 50000;
 // var countNumber = 8;
@@ -88,10 +89,10 @@ document.querySelector('.map').classList.remove('map--faded');
 // функция отрисовки метки
 var renderPin = function (data) {
   var pinElement = PinTemplate.cloneNode(true);
-
+  var positionX = data.location.x + PIN_WIDTH;
   pinElement.querySelector('img').src = data.author.avatar;
   pinElement.querySelector('img').alt = data.offer.title;
-  pinElement.style = 'left: ' + data.location.x + 'px; top: ' + data.location.y + 'px;';
+  pinElement.style = 'left: ' + positionX + 'px; top: ' + data.location.y + 'px;';
 
   return pinElement;
 };

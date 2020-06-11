@@ -99,11 +99,11 @@ var renderPin = function (data) {
   return pinElement;
 };
 
-var generateObject = function (countObj) {
-  for (var i = 0; i < countObj; i++) {
+var generateObject = function () {
+  for (var i = 0; i < arrObject.length; i++) {
     pinFragment.appendChild(renderPin(arrObject[i]));
   }
 };
-generateObject(8);
+generateObject();
 
 mapPins.appendChild(pinFragment);

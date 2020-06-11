@@ -23,6 +23,7 @@ var PHOTOS = [
 var MAX_Y = 630;
 var MIN_Y = 130;
 var PIN_WIDTH = 50 / 2;
+var PIN_HEIGHT = 70;
 var PRICE_MIN = 10000;
 var PRICE_MAX = 50000;
 // var countNumber = 8;
@@ -53,7 +54,7 @@ var generateData = function (i) {
       avatar: 'img/avatars/user0' + (i + 1) + '.png'
     },
     offer: {
-      title: 'Заголовок',
+      title: 'Заголовок' + (i + 1),
       address: locX + ', ' + locY,
       price: getRandomNumb(PRICE_MIN, PRICE_MAX),
       type: TYPE[getRandomIndex(TYPE.length)],
@@ -62,7 +63,7 @@ var generateData = function (i) {
       checkin: CHECKING_TIME[getRandomIndex(CHECKING_TIME.length)],
       checkout: CHECKING_TIME[getRandomIndex(CHECKING_TIME.length)],
       features: FEATURES.slice(getRandomIndex(FEATURES.length)),
-      description: 'Описание',
+      description: 'Описание' + (i + 1),
       photos: PHOTOS.slice(getRandomIndex(PHOTOS.length)),
     },
     location: {
@@ -89,11 +90,11 @@ document.querySelector('.map').classList.remove('map--faded');
 // функция отрисовки метки
 var renderPin = function (data) {
   var pinElement = pinTemplate.cloneNode(true);
-  var positionX = getRandomNumb(0 + PIN_WIDTH, mapWidth - PIN_WIDTH);
 
   pinElement.querySelector('img').src = data.author.avatar;
   pinElement.querySelector('img').alt = data.offer.title;
-  pinElement.style = 'left: ' + positionX + 'px; top: ' + data.location.y + 'px;';
+  pinElement.style.left = data.location.x - PIN_WIDTH / 2 + 'px';
+  pinElement.style.top = data.location.y - PIN_HEIGHT + 'px';
 
   return pinElement;
 };

@@ -26,7 +26,7 @@ var PIN_WIDTH = 50 / 2;
 var PRICE_MIN = 10000;
 var PRICE_MAX = 50000;
 // var countNumber = 8;
-var PinTemplate = document.querySelector('#pin')
+var pinTemplate = document.querySelector('#pin')
   .content
   .querySelector('.map__pin');
 var mapPins = document.querySelector('.map__pins');
@@ -57,7 +57,7 @@ var generateData = function (i) {
       address: locX + ', ' + locY,
       price: getRandomNumb(PRICE_MIN, PRICE_MAX),
       type: TYPE[getRandomIndex(TYPE.length)],
-      rooms: getRandomNumb(1, 3, 100),
+      rooms: getRandomNumb(1, 3),
       guests: getRandomNumb(1, 3),
       checkin: CHECKING_TIME[getRandomIndex(CHECKING_TIME.length)],
       checkout: CHECKING_TIME[getRandomIndex(CHECKING_TIME.length)],
@@ -88,8 +88,9 @@ document.querySelector('.map').classList.remove('map--faded');
 
 // функция отрисовки метки
 var renderPin = function (data) {
-  var pinElement = PinTemplate.cloneNode(true);
-  var positionX = data.location.x + PIN_WIDTH;
+  var pinElement = pinTemplate.cloneNode(true);
+  var positionX = getRandomNumb(0 + PIN_WIDTH, mapWidth - PIN_WIDTH);
+
   pinElement.querySelector('img').src = data.author.avatar;
   pinElement.querySelector('img').alt = data.offer.title;
   pinElement.style = 'left: ' + positionX + 'px; top: ' + data.location.y + 'px;';

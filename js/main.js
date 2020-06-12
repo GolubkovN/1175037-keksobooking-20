@@ -22,7 +22,7 @@ var PHOTOS = [
 ];
 var MAX_Y = 630;
 var MIN_Y = 130;
-var PIN_WIDTH = 50 / 2;
+var PIN_WIDTH = 50;
 var PIN_HEIGHT = 70;
 var PRICE_MIN = 10000;
 var PRICE_MAX = 50000;

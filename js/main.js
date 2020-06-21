@@ -28,7 +28,6 @@ var PRICE_MIN = 10000;
 var PRICE_MAX = 50000;
 var MAIN_PIN_WIDTH = 65;
 var MAIN_PIN_HEIGHT = 65;
-// var countNumber = 8;
 var pinTemplate = document.querySelector('#pin')
   .content
   .querySelector('.map__pin');
@@ -77,6 +76,7 @@ var generateData = function (i) {
 
   return ads;
 };
+
 // Функция создания массива
 var generateMock = function (count) {
   var arr = [];
@@ -141,6 +141,7 @@ var generateObject = function () {
 
 //   elem.appendChild(featureFragment);
 // };
+
 // // Наполнение шаблона из объекта
 // var fillAds = function (card) {
 //   var cardElement = cardTemplate.cloneNode(true);
@@ -151,6 +152,7 @@ var generateObject = function () {
 //     bungalo: 'Бунгало',
 //     palace: 'Дворец'
 //   };
+
 //   // Поиск списка удобств
 //   var features = cardElement.querySelector('.popup__features');
 //   cardElement.querySelector('.popup__avatar').src = card.author.avatar;
@@ -186,12 +188,10 @@ var generateObject = function () {
 // };
 // generateAd();
 
-
 var adForm = document.querySelector('.ad-form');
 var mainPin = map.querySelector('.map__pin--main');
 var mapFilter = map.querySelector('.map__filters');
 var filterSelects = mapFilter.querySelectorAll('select');
-
 
 // Перевод страницы в активное состояние
 var getActivePage = function () {
@@ -202,7 +202,6 @@ var getActivePage = function () {
   activateForm(fieldsets);
   activateForm(filterSelects);
   getAddressValue();
-
 };
 
 mainPin.addEventListener('mousedown', function (evt) {
@@ -212,6 +211,7 @@ mainPin.addEventListener('mousedown', function (evt) {
       break;
   }
 });
+
 // доступ к метке с клавиатуры
 mainPin.addEventListener('keydown', function (evt) {
   evt.preventDefault();
@@ -221,7 +221,8 @@ mainPin.addEventListener('keydown', function (evt) {
       break;
   }
 });
-var fieldsets = adForm.querySelectorAll('fieldset'); // поиск полей формы .ad-form
+var fieldsets = adForm.querySelectorAll('fieldset');
+
 // блокировка полей форм
 var disableForm = function (elem) {
   for (var i = 0; i < elem.length; i++) {
@@ -238,11 +239,10 @@ var activateForm = function (elem) {
   }
 };
 
-
 // Заполнение поля адреса
 var getAddressValue = function () {
-  var pinCenterX = +(mainPin.style.left).split('px')[0] + Math.round(MAIN_PIN_WIDTH / 2);
-  var pinCenterY = Math.round((mainPin.style.top).split('px')[0] - MAIN_PIN_HEIGHT);
+  var pinCenterX = mainPin.offsetLeft + Math.round(MAIN_PIN_WIDTH / 2);
+  var pinCenterY = Math.round(mainPin.offsetTop - MAIN_PIN_HEIGHT);
 
   var inputAddress = adForm.querySelector('#address');
   inputAddress.value = pinCenterX + ', ' + pinCenterY;
@@ -336,7 +336,6 @@ var onRoomQuantityChange = function () {
 var onRoomCapacityChange = function () {
   validateRoomsValue();
 };
-
 
 roomQuantity.addEventListener('change', onRoomQuantityChange);
 roomCapacity.addEventListener('change', onRoomCapacityChange);

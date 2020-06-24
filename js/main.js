@@ -49,4 +49,9 @@
       elem[i].disabled = false;
     }
   };
+
+  window.main = {
+    activateForm: activateForm,
+    getActivePage: getActivePage
+  };
 })();

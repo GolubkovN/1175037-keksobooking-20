@@ -14,8 +14,6 @@
       window.pinCreate.generateObject(offers);
     }, function () {});
 
-    window.cards.generateAd();
-
     activateForm(fieldsets);
     activateForm(filterSelects);
     window.form.getAddressValue();
@@ -54,10 +52,5 @@
     for (var i = 0; i < elem.length; i++) {
       elem[i].disabled = false;
     }
-  };
-
-  window.main = {
-    activateForm: activateForm,
-    getActivePage: getActivePage
   };
 })();

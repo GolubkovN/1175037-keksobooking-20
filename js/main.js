@@ -9,10 +9,14 @@
     window.util.map.classList.remove('map--faded');
     window.util.adForm.classList.remove('ad-form--disabled');
     mapFilter.classList.remove('map__filters--disabled');
-    window.pinCreate.generateObject();
+
+    window.backend.load(function (offers) {
+      window.pinCreate.generateObject(offers);
+    }, function () {});
+
     activateForm(fieldsets);
     activateForm(filterSelects);
-    window.form.etAddressValue();
+    window.form.getAddressValue();
   };
 
   window.util.mainPin.addEventListener('mousedown', function (evt) {
@@ -48,10 +52,5 @@
     for (var i = 0; i < elem.length; i++) {
       elem[i].disabled = false;
     }
-  };
-
-  window.main = {
-    activateForm: activateForm,
-    getActivePage: getActivePage
   };
 })();

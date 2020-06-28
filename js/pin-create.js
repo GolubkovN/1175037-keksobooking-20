@@ -8,7 +8,6 @@
     .querySelector('.map__pin');
   var mapPins = document.querySelector('.map__pins');
 
-  var pinFragment = document.createDocumentFragment();
 
   // функция отрисовки метки
   var renderPin = function (data) {
@@ -22,14 +21,15 @@
     return pinElement;
   };
 
-  var generateObject = function () {
-    for (var i = 0; i < window.mock.arrObject.length; i++) {
-      pinFragment.appendChild(renderPin(window.mock.arrObject[i]));
+  var generateObject = function (data) {
+    var pinFragment = document.createDocumentFragment();
+    for (var i = 0; i < data.length; i++) {
+      pinFragment.appendChild(renderPin(data[i]));
     }
     mapPins.appendChild(pinFragment);
   };
 
   window.pinCreate = {
-    generateObject: generateObject
+    generateObject: generateObject,
   };
 })();

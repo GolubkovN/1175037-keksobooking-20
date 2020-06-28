@@ -4,6 +4,7 @@
   var map = document.querySelector('.map');
   var adForm = document.querySelector('.ad-form');
   var mainPin = map.querySelector('.map__pin--main');
+  var mapPins = document.querySelector('.map__pins');
 
   var getRandomNumb = function (min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -18,6 +19,7 @@
     getRandomIndex: getRandomIndex,
     map: map,
     adForm: adForm,
-    mainPin: mainPin
+    mainPin: mainPin,
+    mapPins: mapPins
   };
 })();

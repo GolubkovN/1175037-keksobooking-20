@@ -14,6 +14,22 @@
     inputAddress.disabled = true;
   };
 
+  // блокировка полей форм
+  var disableForm = function (elem) {
+    for (var i = 0; i < elem.length; i++) {
+      elem[i].disabled = true;
+    }
+  };
+  disableForm(window.util.fieldsets);
+  disableForm(window.util.filterSelects);
+
+  // разблокирование полей форм
+  var activateForm = function (elem) {
+    for (var i = 0; i < elem.length; i++) {
+      elem[i].disabled = false;
+    }
+  };
+
   // Валидация поля заголовка объявления
   var adTitle = document.querySelector('#title');
 
@@ -105,9 +121,25 @@
   roomQuantity.addEventListener('change', onRoomQuantityChange);
   roomCapacity.addEventListener('change', onRoomCapacityChange);
 
+  var timeIn = document.querySelector('#timein');
+  var timeOut = document.querySelector('#timeout');
+
+  var checkTimeIn = function () {
+    timeOut.value = timeIn.value;
+  };
+
+  var checkTimeOut = function () {
+    timeIn.value = timeOut.value;
+  };
+
+  timeIn.addEventListener('change', checkTimeIn);
+  timeOut.addEventListener('change', checkTimeOut);
+
+
   window.form = {
     getAddressValue: getAddressValue,
     validateRoomsValue: validateRoomsValue,
-    getValidityTitle: getValidityTitle
+    getValidityTitle: getValidityTitle,
+    activate: activateForm
   };
 })();

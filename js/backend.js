@@ -31,9 +31,8 @@
     xhr.open('GET', URL.GET);
     xhr.send();
   };
+
   window.backend = {
     load: load,
   };
 })();
-
-

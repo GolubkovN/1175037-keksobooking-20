@@ -1,21 +1,17 @@
 'use strict';
 
 (function () {
-  var mapFilter = window.util.map.querySelector('.map__filters');
-  var filterSelects = mapFilter.querySelectorAll('select');
-
   // Перевод страницы в активное состояние
   var getActivePage = function () {
     window.util.map.classList.remove('map--faded');
     window.util.adForm.classList.remove('ad-form--disabled');
-    mapFilter.classList.remove('map__filters--disabled');
-
+    window.util.mapFilter.classList.remove('map__filters--disabled');
     window.backend.load(function (offers) {
       window.pinCreate.generateObject(offers);
+      window.map.showCard();
     }, function () {});
-
-    activateForm(fieldsets);
-    activateForm(filterSelects);
+    window.form.activate(window.util.fieldsets);
+    window.form.activate(window.util.filterSelects);
     window.form.getAddressValue();
   };
 
@@ -36,21 +32,4 @@
         break;
     }
   });
-  var fieldsets = window.util.adForm.querySelectorAll('fieldset');
-
-  // блокировка полей форм
-  var disableForm = function (elem) {
-    for (var i = 0; i < elem.length; i++) {
-      elem[i].disabled = true;
-    }
-  };
-  disableForm(fieldsets);
-  disableForm(filterSelects);
-
-  // разблокирование полей форм
-  var activateForm = function (elem) {
-    for (var i = 0; i < elem.length; i++) {
-      elem[i].disabled = false;
-    }
-  };
 })();

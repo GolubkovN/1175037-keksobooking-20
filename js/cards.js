@@ -69,18 +69,15 @@
       popupPhotos.appendChild(photoElem);
     }
     photo.remove();
+    var closePopup = cardElement.querySelector('.popup__close');
+    closePopup.addEventListener('click', window.map.onClosePopupClick);
 
     return cardElement;
   };
 
-  var generateCard = function (ads) {
-    var cardFragment = document.createDocumentFragment();
-    cardFragment.appendChild(fillAds(ads));
-    var filterContainer = window.util.map.querySelector('.map__filters-container');
-    window.util.map.insertBefore(cardFragment, filterContainer);
-  };
-
   window.cards = {
-    generate: generateCard,
+    generate: function (offer) {
+      window.util.filterContainer.before(fillAds(offer));
+    }
   };
 })();

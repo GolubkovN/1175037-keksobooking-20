@@ -6,8 +6,6 @@
   var pinTemplate = document.querySelector('#pin')
     .content
     .querySelector('.map__pin');
-  var mapPins = document.querySelector('.map__pins');
-
 
   // функция отрисовки метки
   var renderPin = function (data) {
@@ -18,18 +16,29 @@
     pinElement.style.left = data.location.x - PIN_WIDTH / 2 + 'px';
     pinElement.style.top = data.location.y - PIN_HEIGHT + 'px';
 
+    pinElement.addEventListener('click', function () {
+      window.map.closeCard();
+      pinElement.classList.add('map__pin--active');
+      window.cards.generate(data);
+      document.addEventListener('keydown', window.map.onCardEscDown);
+    });
+
     return pinElement;
   };
 
-  var generateObject = function (data) {
+  var insertPins = function (elements) {
     var pinFragment = document.createDocumentFragment();
-    for (var i = 0; i < data.length; i++) {
-      pinFragment.appendChild(renderPin(data[i]));
+
+    for (var i = 0; i < elements.length; i++) {
+      if (elements[i].offer) {
+        pinFragment.appendChild(renderPin(elements[i]));
+      }
     }
-    mapPins.appendChild(pinFragment);
+
+    window.util.mapPins.appendChild(pinFragment);
   };
 
   window.pinCreate = {
-    generateObject: generateObject,
+    insertPins: insertPins
   };
 })();

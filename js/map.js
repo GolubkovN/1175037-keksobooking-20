@@ -1,31 +1,39 @@
 'use strict';
 
 (function () {
-  var getActiveCard = function (id) {
-    window.backend.load(function (data) {
-      window.cards.generate(data[id]);
-    }, function () {});
+  var onSuccessLoad = function (offer) {
+    window.pinCreate.insertPins(offer);
+    window.util.filterContainer.classList.remove('hidden');
   };
 
-  var showCard = function () {
-    var pins = window.util.mapPins.querySelectorAll('.map__pin:not(.map__pin--main)');
+  var onCardEscDown = function (evt) {
+    if (evt.key === 'Escape') {
+      evt.preventDefault();
+      closeCard();
+    }
+  };
 
-    pins.forEach(function (pin, id) {
-      pin.addEventListener('click', function (evt) {
-        evt.preventDefault();
-        var popup = document.querySelector('.popup');
-        if (popup !== null) {
-          popup.remove();
-          getActiveCard(id);
-        } else {
-          getActiveCard(id);
-        }
-      });
-    });
+  var onClosePopupClick = function () {
+    closeCard();
+  };
+
+  var closeCard = function () {
+    var popup = document.querySelector('.popup');
+    var activePin = document.querySelector('.map__pin--active');
+
+    if (popup) {
+      popup.remove();
+      activePin.classList.remove('map__pin--active');
+    }
+
+    document.removeEventListener('keydown', onCardEscDown);
   };
 
   window.map = {
-    showCard: showCard
+    success: onSuccessLoad,
+    closeCard: closeCard,
+    onCardEscDown: onCardEscDown,
+    onClosePopupClick: onClosePopupClick
   };
 })();
 

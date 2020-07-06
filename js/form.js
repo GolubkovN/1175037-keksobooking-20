@@ -140,6 +140,7 @@
     getAddressValue: getAddressValue,
     validateRoomsValue: validateRoomsValue,
     getValidityTitle: getValidityTitle,
-    activate: activateForm
+    activate: activateForm,
+    MAIN_PIN_HEIGHT: MAIN_PIN_HEIGHT
   };
 })();

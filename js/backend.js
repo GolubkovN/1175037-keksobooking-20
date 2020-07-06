@@ -8,8 +8,12 @@
     OK: 200
   };
   var TIMEOUT_IN_MS = 5000;
+  var method = {
+    get: 'GET',
+    post: 'POST'
+  };
 
-  var createXhr = function (onSuccess, onError) {
+  var createXhr = function (onSuccess, onError, type) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     xhr.timeout = TIMEOUT_IN_MS;
@@ -22,18 +26,24 @@
       }
     });
 
-    return xhr;
+    xhr.addEventListener('error', function () {
+      onError('Произошла ошибка соединения');
+    });
+
+    xhr.addEventListener('timeout', function () {
+      onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
+    });
+
+
+    xhr.open(type, URL.GET);
+    xhr.send();
   };
 
   var load = function (onSuccess, onError) {
-    var xhr = createXhr(onSuccess, onError);
-
-    xhr.open('GET', URL.GET);
-    xhr.send();
+    createXhr(onSuccess, onError, method.get);
   };
+
   window.backend = {
     load: load,
   };
 })();
-
-

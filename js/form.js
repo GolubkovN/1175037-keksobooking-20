@@ -6,11 +6,11 @@
 
   // Заполнение поля адреса
   var getAddressValue = function () {
-    var pinCenterX = window.util.mainPin.offsetLeft + Math.round(MAIN_PIN_WIDTH / 2);
-    var pinCenterY = Math.round(window.util.mainPin.offsetTop - MAIN_PIN_HEIGHT);
+    var pinX = window.util.mainPin.offsetLeft + Math.round(MAIN_PIN_WIDTH / 2);
+    var pinY = Math.round(window.util.mainPin.offsetTop - MAIN_PIN_HEIGHT);
 
     var inputAddress = window.util.adForm.querySelector('#address');
-    inputAddress.value = pinCenterX + ', ' + pinCenterY;
+    inputAddress.value = pinX + ', ' + pinY;
     inputAddress.disabled = true;
   };
 
@@ -140,6 +140,7 @@
     getAddressValue: getAddressValue,
     validateRoomsValue: validateRoomsValue,
     getValidityTitle: getValidityTitle,
-    activate: activateForm
+    activate: activateForm,
+    MAIN_PIN_HEIGHT: MAIN_PIN_HEIGHT
   };
 })();

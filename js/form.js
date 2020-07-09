@@ -52,8 +52,6 @@
     getValidityTitle();
   };
 
-  adTitle.addEventListener('change', onTitleChange);
-
   // Валидация типа жилья и минимальной цены
   var price = document.querySelector('#price');
   var type = document.querySelector('#type');
@@ -71,7 +69,6 @@
   var onTypeChange = function () {
     getMinPrice();
   };
-  type.addEventListener('change', onTypeChange);
 
   // Валидация Кол-ва комнат и гостей
   var roomQuantity = document.querySelector('#room_number');
@@ -118,9 +115,7 @@
     validateRoomsValue();
   };
 
-  roomQuantity.addEventListener('change', onRoomQuantityChange);
-  roomCapacity.addEventListener('change', onRoomCapacityChange);
-
+  // Валидация времени заезды/выезда
   var timeIn = document.querySelector('#timein');
   var timeOut = document.querySelector('#timeout');
 
@@ -132,15 +127,21 @@
     timeIn.value = timeOut.value;
   };
 
-  timeIn.addEventListener('change', checkTimeIn);
-  timeOut.addEventListener('change', checkTimeOut);
-
+  var addEventListeners = function () {
+    adTitle.addEventListener('change', onTitleChange);
+    type.addEventListener('change', onTypeChange);
+    roomQuantity.addEventListener('change', onRoomQuantityChange);
+    roomCapacity.addEventListener('change', onRoomCapacityChange);
+    timeIn.addEventListener('change', checkTimeIn);
+    timeOut.addEventListener('change', checkTimeOut);
+  };
+  addEventListeners();
 
   window.form = {
     getAddressValue: getAddressValue,
     validateRoomsValue: validateRoomsValue,
     getValidityTitle: getValidityTitle,
     activate: activateForm,
-    MAIN_PIN_HEIGHT: MAIN_PIN_HEIGHT
+    disable: disableForm
   };
 })();

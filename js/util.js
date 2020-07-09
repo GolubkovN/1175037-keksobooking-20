@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  var offersToFilter = [];
   var map = document.querySelector('.map');
   var adForm = document.querySelector('.ad-form');
   var mainPin = map.querySelector('.map__pin--main');
@@ -27,7 +26,6 @@
   window.util = {
     getRandomNumb: getRandomNumb,
     getRandomIndex: getRandomIndex,
-    offersToFilter: offersToFilter,
     map: map,
     adForm: adForm,
     mainPin: mainPin,

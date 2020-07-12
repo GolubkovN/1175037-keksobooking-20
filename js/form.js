@@ -11,8 +11,10 @@
 
     var inputAddress = window.util.adForm.querySelector('#address');
     inputAddress.value = pinX + ', ' + pinY;
-    inputAddress.disabled = true;
+    inputAddress.setAttribute('readonly', 'readonly');
+    inputAddress.classList.add('ad-form--disabled');
   };
+  getAddressValue();
 
   // блокировка полей форм
   var disableForm = function (elem) {
@@ -142,6 +144,6 @@
     validateRoomsValue: validateRoomsValue,
     getValidityTitle: getValidityTitle,
     activate: activateForm,
-    disable: disableForm
+    disable: disableForm,
   };
 })();

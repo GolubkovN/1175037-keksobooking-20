@@ -1,20 +1,30 @@
 'use strict';
 
 (function () {
+  var defaultAddressValue = {
+    x: 570 + 'px',
+    y: 375 + 'px'
+  };
+
   // Функуия возвращает исходное состояние страницы
   // после отправки данных
   var getDisabledPage = function () {
     window.util.map.classList.add('map--faded');
     window.util.adForm.classList.add('ad-form--disabled');
-    window.util.adForm.reset();
     window.util.mapFilter.classList.add('map__filters--disabled');
+    window.util.filterContainer.classList.add('hidden');
+    window.util.adForm.reset();
+    window.util.mainPin.style.left = defaultAddressValue.x;
+    window.util.mainPin.style.top = defaultAddressValue.y;
     window.form.disable(window.util.fieldsets);
     window.form.disable(window.util.filterSelects);
     window.pinCreate.removePins();
+    window.form.getAddressValue();
     window.map.closeCard();
     window.util.mainPin.addEventListener('mousedown', onMainPinMouseDown);
     window.util.mainPin.addEventListener('keydown', onMainPinKeyDown);
   };
+  getDisabledPage();
 
   // Перевод страницы в активное состояние
   var getActivePage = function () {
@@ -80,7 +90,7 @@
   };
 
   var onSuccessMessageClick = function (evt) {
-    if (evt.target.matches('.succes')) {
+    if (evt.target.matches('div.succes')) {
       evt.preventDefault();
       removeSuccesMessage();
       document.removeEventListener('keydown', onSuccessMessageEscPres);
@@ -90,18 +100,19 @@
 
   // Отправка данных с формы
   var onFormSubmit = function (evt) {
-    evt.preventDefault();
     window.backend.upload(new FormData(window.util.adForm), showSuccessMessage, window.map.error);
+    evt.preventDefault();
     getDisabledPage();
   };
 
   window.util.adForm.addEventListener('submit', onFormSubmit);
 
   // Очистка формы
-  var onFormReset = function () {
-    window.util.adForm.reset();
+  var onResetClick = function () {
+    getDisabledPage();
   };
 
-  window.util.adForm.addEventListener('reset', onFormReset);
+  var resetBtn = window.util.adForm.querySelector('.ad-form__reset');
+  resetBtn.addEventListener('click', onResetClick);
 
 })();

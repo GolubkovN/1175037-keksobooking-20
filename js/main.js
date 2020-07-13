@@ -62,47 +62,15 @@
   window.util.mainPin.addEventListener('mousedown', onMainPinMouseDown);
   window.util.mainPin.addEventListener('keydown', onMainPinKeyDown);
 
-  // Показ сообщения об успешной загрузке
-  var successTemplate = document.querySelector('#success').content.querySelector('.success');
-
-  var showSuccessMessage = function () {
-    var successMessage = successTemplate.cloneNode(true);
-    document.querySelector('main').appendChild(successMessage);
-
-    document.addEventListener('keydown', onSuccessMessageEscPres);
-    document.addEventListener('click', onSuccessMessageClick);
-  };
-
-  // взможность скрыть сообщение об успешной загрузке
-  var removeSuccesMessage = function () {
-    document.querySelector('.success').remove();
-  };
-
-  var onSuccessMessageEscPres = function (evt) {
-    switch (evt.key) {
-      case 'Escape':
-        evt.preventDefault();
-        removeSuccesMessage();
-        document.removeEventListener('keydown', onSuccessMessageEscPres);
-        document.removeEventListener('click', onSuccessMessageClick);
-        break;
-    }
-  };
-
-  var onSuccessMessageClick = function (evt) {
-    if (evt.target.matches('div.succes')) {
-      evt.preventDefault();
-      removeSuccesMessage();
-      document.removeEventListener('keydown', onSuccessMessageEscPres);
-      document.removeEventListener('click', onSuccessMessageClick);
-    }
+  var onSuccessUpload = function () {
+    window.message.showSuccessMessage();
+    getDisabledPage();
   };
 
   // Отправка данных с формы
   var onFormSubmit = function (evt) {
-    window.backend.upload(new FormData(window.util.adForm), showSuccessMessage, window.map.error);
+    window.backend.upload(new FormData(window.util.adForm), onSuccessUpload, window.map.error);
     evt.preventDefault();
-    getDisabledPage();
   };
 
   window.util.adForm.addEventListener('submit', onFormSubmit);

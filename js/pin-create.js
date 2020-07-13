@@ -38,7 +38,16 @@
     window.util.mapPins.appendChild(pinFragment);
   };
 
+  var removePins = function () {
+    var adsPins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
+    adsPins.forEach(function (adsPin) {
+      adsPin.remove();
+    });
+
+  };
+
   window.pinCreate = {
-    insertPins: insertPins
+    insertPins: insertPins,
+    removePins: removePins
   };
 })();

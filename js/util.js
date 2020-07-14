@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var MAX_PINS_QUANTITY = 5;
   var map = document.querySelector('.map');
   var adForm = document.querySelector('.ad-form');
   var mainPin = map.querySelector('.map__pin--main');
@@ -13,10 +14,7 @@
   var minY = 130;
   var maxX = document.querySelector('.map__overlay').offsetWidth;
   var minX = 0;
-
-  var getRandomNumb = function (min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  };
+  var filteredOffers = [];
 
   var getRandomIndex = function (arrLength) {
     return Math.floor(Math.random() * arrLength);
@@ -24,7 +22,6 @@
 
 
   window.util = {
-    getRandomNumb: getRandomNumb,
     getRandomIndex: getRandomIndex,
     map: map,
     adForm: adForm,
@@ -37,6 +34,8 @@
     maxY: maxY,
     minY: minY,
     maxX: maxX,
-    minX: minX
+    minX: minX,
+    MAX_PINS_QUANTITY: MAX_PINS_QUANTITY,
+    filteredOffers: filteredOffers
   };
 })();

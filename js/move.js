@@ -6,7 +6,7 @@
   var coordslimits = {
     left: window.util.minX - window.util.mainPin.offsetHeight / 2,
     right: window.util.maxX - window.util.mainPin.offsetWidth / 2,
-    top: window.util.minY + window.util.mainPin.offsetHeight - MAIN_PIN_HEIGHT,
+    top: window.util.minY + window.util.mainPin.offsetHeight - (MAIN_PIN_HEIGHT * 2),
     bottom: window.util.maxY + window.util.mainPin.offsetHeight - MAIN_PIN_HEIGHT
   };
 

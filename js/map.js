@@ -3,8 +3,10 @@
 (function () {
   var errorTemplate = document.querySelector('#error').content.querySelector('.error');
 
-  var onSuccessLoad = function (offer) {
-    window.pinCreate.insertPins(offer);
+
+  var onSuccessLoad = function (data) {
+    window.util.filteredOffers = data;
+    window.filter.updatePins();
     window.util.filterContainer.classList.remove('hidden');
   };
 
@@ -51,6 +53,7 @@
     }
   };
 
+  // Возможность закрыть карточку объявления
   var onCardEscDown = function (evt) {
     if (evt.key === 'Escape') {
       evt.preventDefault();
@@ -58,7 +61,6 @@
     }
   };
 
-  // Возможность закрыть карточку объявления
   var onClosePopupClick = function () {
     closeCard();
   };

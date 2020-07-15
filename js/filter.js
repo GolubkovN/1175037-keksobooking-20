@@ -1,22 +1,22 @@
 'use strict';
 
 (function () {
-  var housingType = window.util.mapFilter.querySelector('#housing-type');
-  var housingPrice = window.util.mapFilter.querySelector('#housing-price');
-  var housingRooms = window.util.mapFilter.querySelector('#housing-rooms');
-  var housingGuests = window.util.mapFilter.querySelector('#housing-guests');
-  var defaultValue = 'any';
-
-  var priceValues = {
+  var PRICE_VALUES = {
     low: 'low',
     mid: 'middle',
     high: 'high'
   };
 
-  var priceBorders = {
+  var PRICE_BORDERS = {
     min: 10000,
     max: 50000
   };
+
+  var housingType = window.util.mapFilter.querySelector('#housing-type');
+  var housingPrice = window.util.mapFilter.querySelector('#housing-price');
+  var housingRooms = window.util.mapFilter.querySelector('#housing-rooms');
+  var housingGuests = window.util.mapFilter.querySelector('#housing-guests');
+  var defaultValue = 'any';
 
   window.util.mapFilter.addEventListener('change', window.debounce(function () {
     window.map.closeCard();
@@ -48,13 +48,13 @@
 
   var filterByPrice = function (it) {
     switch (housingPrice.value) {
-      case priceValues.low:
-        return it.offer.price <= priceBorders.min;
-      case priceValues.mid:
-        return it.offer.price >= priceBorders.min &&
-               it.offer.price <= priceBorders.max;
-      case priceValues.high:
-        return it.offer.price >= priceBorders.max;
+      case PRICE_VALUES.low:
+        return it.offer.price <= PRICE_BORDERS.min;
+      case PRICE_VALUES.mid:
+        return it.offer.price >= PRICE_BORDERS.min &&
+               it.offer.price <= PRICE_BORDERS.max;
+      case PRICE_VALUES.high:
+        return it.offer.price >= PRICE_BORDERS.max;
       default:
         return true;
     }

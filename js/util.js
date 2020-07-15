@@ -2,6 +2,10 @@
 
 (function () {
   var MAX_PINS_QUANTITY = 5;
+  var MAXY = 630;
+  var MINY = 130;
+  var MAXX = document.querySelector('.map__overlay').offsetWidth;
+  var MINX = 0;
   var map = document.querySelector('.map');
   var adForm = document.querySelector('.ad-form');
   var mainPin = map.querySelector('.map__pin--main');
@@ -10,10 +14,6 @@
   var filterSelects = mapFilter.querySelectorAll('select');
   var fieldsets = adForm.querySelectorAll('fieldset');
   var filterContainer = map.querySelector('.map__filters-container');
-  var maxY = 630;
-  var minY = 130;
-  var maxX = document.querySelector('.map__overlay').offsetWidth;
-  var minX = 0;
   var filteredOffers = [];
 
   var getRandomIndex = function (arrLength) {
@@ -31,10 +31,10 @@
     filterSelects: filterSelects,
     fieldsets: fieldsets,
     filterContainer: filterContainer,
-    maxY: maxY,
-    minY: minY,
-    maxX: maxX,
-    minX: minX,
+    maxY: MAXY,
+    minY: MINY,
+    maxX: MAXX,
+    minX: MINX,
     MAX_PINS_QUANTITY: MAX_PINS_QUANTITY,
     filteredOffers: filteredOffers
   };

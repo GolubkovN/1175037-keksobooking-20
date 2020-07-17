@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var defaultAddressValue = {
+  var DEFAULT_ADDRESS_VALUE = {
     x: 570 + 'px',
     y: 375 + 'px'
   };
@@ -14,8 +14,8 @@
     window.util.mapFilter.classList.add('map__filters--disabled');
     window.util.filterContainer.classList.add('hidden');
     window.util.adForm.reset();
-    window.util.mainPin.style.left = defaultAddressValue.x;
-    window.util.mainPin.style.top = defaultAddressValue.y;
+    window.util.mainPin.style.left = DEFAULT_ADDRESS_VALUE.x;
+    window.util.mainPin.style.top = DEFAULT_ADDRESS_VALUE.y;
     window.form.disable(window.util.fieldsets);
     window.form.disable(window.util.filterSelects);
     window.pinCreate.removePins();

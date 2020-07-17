@@ -2,10 +2,10 @@
 
 (function () {
   var MAX_PINS_QUANTITY = 5;
-  var MAXY = 630;
-  var MINY = 130;
-  var MAXX = document.querySelector('.map__overlay').offsetWidth;
-  var MINX = 0;
+  var MAX_Y = 630;
+  var MIN_Y = 130;
+  var MAX_X = document.querySelector('.map__overlay').offsetWidth;
+  var MIN_X = 0;
   var map = document.querySelector('.map');
   var adForm = document.querySelector('.ad-form');
   var mainPin = map.querySelector('.map__pin--main');
@@ -31,10 +31,10 @@
     filterSelects: filterSelects,
     fieldsets: fieldsets,
     filterContainer: filterContainer,
-    maxY: MAXY,
-    minY: MINY,
-    maxX: MAXX,
-    minX: MINX,
+    maxY: MAX_Y,
+    minY: MIN_Y,
+    maxX: MAX_X,
+    minX: MIN_X,
     MAX_PINS_QUANTITY: MAX_PINS_QUANTITY,
     filteredOffers: filteredOffers
   };

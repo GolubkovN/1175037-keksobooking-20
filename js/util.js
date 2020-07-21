@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var DEBOUNCE_INTERVAL = 500;
   var MAX_PINS_QUANTITY = 5;
   var MAX_Y = 630;
   var MIN_Y = 130;
@@ -16,13 +17,7 @@
   var filterContainer = map.querySelector('.map__filters-container');
   var filteredOffers = [];
 
-  var getRandomIndex = function (arrLength) {
-    return Math.floor(Math.random() * arrLength);
-  };
-
-
   window.util = {
-    getRandomIndex: getRandomIndex,
     map: map,
     adForm: adForm,
     mainPin: mainPin,
@@ -36,6 +31,7 @@
     maxX: MAX_X,
     minX: MIN_X,
     MAX_PINS_QUANTITY: MAX_PINS_QUANTITY,
+    DEBOUNCE_INTERVAL: DEBOUNCE_INTERVAL,
     filteredOffers: filteredOffers
   };
 })();

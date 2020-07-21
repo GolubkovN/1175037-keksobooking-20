@@ -3,7 +3,6 @@
 (function () {
   var errorTemplate = document.querySelector('#error').content.querySelector('.error');
 
-
   var onSuccessLoad = function (data) {
     window.util.filteredOffers = data;
     window.filter.updatePins();

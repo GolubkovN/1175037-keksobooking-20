@@ -43,7 +43,6 @@
     adsPins.forEach(function (adsPin) {
       adsPin.remove();
     });
-
   };
 
   window.pinCreate = {

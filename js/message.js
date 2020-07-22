@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-
   // Показ сообщения об успешной загрузке
   var successTemplate = document.querySelector('#success').content.querySelector('.success');
 

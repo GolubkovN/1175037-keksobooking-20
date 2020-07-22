@@ -1,13 +1,13 @@
 'use strict';
 
 (function () {
-  var PRICE_VALUES = {
+  var PriceValues = {
     low: 'low',
     mid: 'middle',
     high: 'high'
   };
 
-  var PRICE_BORDERS = {
+  var PriceBorders = {
     min: 10000,
     max: 50000
   };
@@ -22,7 +22,7 @@
     window.map.closeCard();
     window.pinCreate.removePins();
     updatePins();
-  }));
+  }, window.util.DEBOUNCE_INTERVAL));
 
   var getFilteredElems = function (elements, callback, count) {
     var filteredElems = [];
@@ -48,13 +48,13 @@
 
   var filterByPrice = function (it) {
     switch (housingPrice.value) {
-      case PRICE_VALUES.low:
-        return it.offer.price <= PRICE_BORDERS.min;
-      case PRICE_VALUES.mid:
-        return it.offer.price >= PRICE_BORDERS.min &&
-               it.offer.price <= PRICE_BORDERS.max;
-      case PRICE_VALUES.high:
-        return it.offer.price >= PRICE_BORDERS.max;
+      case PriceValues.low:
+        return it.offer.price <= PriceBorders.min;
+      case PriceValues.mid:
+        return it.offer.price >= PriceBorders.min &&
+               it.offer.price <= PriceBorders.max;
+      case PriceValues.high:
+        return it.offer.price >= PriceBorders.max;
       default:
         return true;
     }

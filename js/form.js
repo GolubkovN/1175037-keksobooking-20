@@ -116,7 +116,7 @@
     validateRoomsValue();
   };
 
-  // Валидация времени заезды/выезда
+  // Валидация времени заезда/выезда
   var timeIn = document.querySelector('#timein');
   var timeOut = document.querySelector('#timeout');
 

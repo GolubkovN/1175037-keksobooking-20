@@ -1,6 +1,8 @@
 'use strict';
 
 (function () {
+  var MIN_TITLE_LENGTH = 30;
+  var MAX_TITLE_LENGTH = 100;
   var DEBOUNCE_INTERVAL = 500;
   var MAX_PINS_QUANTITY = 5;
   var MAX_Y = 630;
@@ -32,6 +34,8 @@
     minX: MIN_X,
     MAX_PINS_QUANTITY: MAX_PINS_QUANTITY,
     DEBOUNCE_INTERVAL: DEBOUNCE_INTERVAL,
+    MIN_TITLE_LENGTH: MIN_TITLE_LENGTH,
+    MAX_TITLE_LENGTH: MAX_TITLE_LENGTH,
     filteredOffers: filteredOffers
   };
 })();

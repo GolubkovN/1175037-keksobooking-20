@@ -34,7 +34,7 @@
     window.form.activate(window.util.fieldsets);
     window.form.activate(window.util.filterSelects);
     window.form.getAddressValue();
-    window.backend.load(window.map.success, window.map.error);
+    window.backend.load(window.map.onSuccessLoad, window.map.onErrorLoad);
   };
 
   var onMainPinMouseDown = function (evt) {

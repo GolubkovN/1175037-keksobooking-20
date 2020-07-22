@@ -77,8 +77,8 @@
   };
 
   window.map = {
-    success: onSuccessLoad,
-    error: onErrorLoad,
+    onSuccessLoad: onSuccessLoad,
+    onErrorLoad: onErrorLoad,
     closeCard: closeCard,
     onCardEscDown: onCardEscDown,
     onClosePopupClick: onClosePopupClick

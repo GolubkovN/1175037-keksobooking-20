@@ -6,8 +6,8 @@
     OK: 200
   };
   var Method = {
-    get: 'GET',
-    post: 'POST'
+    GET: 'GET',
+    POST: 'POST'
   };
 
   var createXhr = function (onSuccess, onError, type, url, data) {
@@ -36,11 +36,11 @@
   };
 
   var load = function (onSuccess, onError) {
-    createXhr(onSuccess, onError, Method.get, 'https://javascript.pages.academy/keksobooking/data');
+    createXhr(onSuccess, onError, Method.GET, 'https://javascript.pages.academy/keksobooking/data');
   };
 
   var upload = function (data, onSuccess, onError) {
-    createXhr(onSuccess, onError, Method.post, 'https://javascript.pages.academy/keksobooking', data);
+    createXhr(onSuccess, onError, Method.POST, 'https://javascript.pages.academy/keksobooking', data);
   };
 
   window.backend = {

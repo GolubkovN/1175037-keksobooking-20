@@ -9,31 +9,31 @@
 
   // функция отрисовки метки
   var renderPin = function (data) {
-    var pinElement = pinTemplate.cloneNode(true);
+    var pin = pinTemplate.cloneNode(true);
 
-    pinElement.querySelector('img').src = data.author.avatar;
-    pinElement.querySelector('img').alt = data.offer.title;
-    pinElement.style.left = data.location.x - PIN_WIDTH / 2 + 'px';
-    pinElement.style.top = data.location.y - PIN_HEIGHT + 'px';
+    pin.querySelector('img').src = data.author.avatar;
+    pin.querySelector('img').alt = data.offer.title;
+    pin.style.left = data.location.x - PIN_WIDTH / 2 + 'px';
+    pin.style.top = data.location.y - PIN_HEIGHT + 'px';
 
-    pinElement.addEventListener('click', function () {
+    pin.addEventListener('click', function () {
       window.map.closeCard();
-      pinElement.classList.add('map__pin--active');
+      pin.classList.add('map__pin--active');
       window.cards.generate(data);
       document.addEventListener('keydown', window.map.onCardEscDown);
     });
 
-    return pinElement;
+    return pin;
   };
 
   var insertPins = function (elements) {
     var pinFragment = document.createDocumentFragment();
 
-    for (var i = 0; i < elements.length; i++) {
-      if (elements[i].offer) {
-        pinFragment.appendChild(renderPin(elements[i]));
+    elements.forEach(function (element) {
+      if (element.offer) {
+        pinFragment.appendChild(renderPin(element));
       }
-    }
+    });
 
     window.util.mapPins.appendChild(pinFragment);
   };

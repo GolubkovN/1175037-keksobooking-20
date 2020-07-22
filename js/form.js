@@ -17,32 +17,31 @@
   getAddressValue();
 
   // блокировка полей форм
-  var disableForm = function (elem) {
-    for (var i = 0; i < elem.length; i++) {
-      elem[i].disabled = true;
-    }
+  var disableForm = function (elements) {
+    elements.forEach(function (element) {
+      element.disabled = true;
+    });
   };
+
   disableForm(window.util.fieldsets);
   disableForm(window.util.filterSelects);
 
   // разблокирование полей форм
-  var activateForm = function (elem) {
-    for (var i = 0; i < elem.length; i++) {
-      elem[i].disabled = false;
-    }
+  var activateForm = function (elements) {
+    elements.forEach(function (element) {
+      element.disabled = false;
+    });
   };
 
   // Валидация поля заголовка объявления
   var adTitle = document.querySelector('#title');
 
   var getValidityTitle = function () {
-    var MIN_TITLE_LENGTH = 30;
-    var MAX_TITLE_LENGTH = 100;
     var titleValueLength = adTitle.value.length;
     if (adTitle.validity.tooShort) {
-      adTitle.setCustomValidity('Камон, должно быть не меньше 30 символов! ' + 'Ещё ' + (MIN_TITLE_LENGTH - titleValueLength) + ' символов');
+      adTitle.setCustomValidity('Камон, должно быть не меньше 30 символов! ' + 'Ещё ' + (window.util.MIN_TITLE_LENGTH - titleValueLength) + ' символов');
     } else if (adTitle.validity.tooLong) {
-      adTitle.setCustomValidity('Нет-нет... Это уже перебор, максимум 100 симвалов! ' + 'Удалите лишние ' + (MAX_TITLE_LENGTH - titleValueLength) + ' символов');
+      adTitle.setCustomValidity('Нет-нет... Это уже перебор, максимум 100 симвалов! ' + 'Удалите лишние ' + (window.util.MAX_TITLE_LENGTH - titleValueLength) + ' символов');
     } else if (adTitle.validity.valueMissing) {
       adTitle.setCustomValidity('Это поле обязательно к заполнению!!!');
     } else {
@@ -121,11 +120,11 @@
   var timeIn = document.querySelector('#timein');
   var timeOut = document.querySelector('#timeout');
 
-  var checkTimeIn = function () {
+  var onTimeInChange = function () {
     timeOut.value = timeIn.value;
   };
 
-  var checkTimeOut = function () {
+  var onTimeOutChange = function () {
     timeIn.value = timeOut.value;
   };
 
@@ -134,8 +133,8 @@
     type.addEventListener('change', onTypeChange);
     roomQuantity.addEventListener('change', onRoomQuantityChange);
     roomCapacity.addEventListener('change', onRoomCapacityChange);
-    timeIn.addEventListener('change', checkTimeIn);
-    timeOut.addEventListener('change', checkTimeOut);
+    timeIn.addEventListener('change', onTimeInChange);
+    timeOut.addEventListener('change', onTimeOutChange);
   };
   addEventListeners();
 
